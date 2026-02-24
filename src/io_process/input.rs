@@ -49,7 +49,10 @@ pub fn read_input() -> io::Result<String> {
                     is_continuation = true;
                 } else {
                     input.push_str(&trimmed_input);
-                    break;
+                    buffer.clear();
+                    if !input.ends_with('|') {
+                        break;
+                    }
                 }
             },
             Err(e) => return Err(e),

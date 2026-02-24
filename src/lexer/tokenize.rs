@@ -167,5 +167,16 @@ mod tests {
             "echo", "\"hello world\"", "|", "cat", "-e", ">", "output.txt"
         ];
         assert_eq!(tokenize(input3), expected_tokens3);
+
+        let input4 = "echo \"hello world\" >> 2>&1";
+        let expected_tokens4 = vec![
+            "echo", "\"hello world\"", ">>", "2", ">", "&", "1"];
+        assert_eq!(tokenize(input4), expected_tokens4);
+
+        let input5 = "echo \"hello world\" && (ls -l | grep \"test\") > output.txt";
+        let expected_token5 = vec![
+            "echo", "\"hello world\"", "&&", "(", "ls", "-l", "|", "grep", "\"test\"", ")", ">", "output.txt"
+        ];
+        assert_eq!(tokenize(input5), expected_token5);
     }
 }
